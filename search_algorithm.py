@@ -24,14 +24,29 @@ def linear_search(searched_sequence, number):
     slovník = {"positions": positions, "count": count}
     return slovník
 
+
+def pattern_search(sequence, template):
+    nalezene_pozice = set()
+    zacatek = 0
+    index = len(template)
+    while index < len(sequence):
+        if template == sequence[zacatek:index]:
+            nalezene_pozice.add(zacatek)
+        zacatek = zacatek + 1
+        index = index + 1
+    return nalezene_pozice
+
+
+
 def main():
     file_name = "sequential.json"
-    key = "unordered_numbers"
+    key = "dna_sequence"
     searched_number = 5
+    template = "TGAC"
     sequential_data = read_data(file_name, key)
-    slovník = linear_search(sequential_data, searched_number)
-    print(sequential_data)
-    print(slovník)
+    # slovník = linear_search(sequential_data, searched_number)
+    nalezene_pozice_zacatku_vzoru = pattern_search(sequential_data, template)
+    print(nalezene_pozice_zacatku_vzoru)
 
 
 if __name__ == '__main__':
